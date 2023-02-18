@@ -2,6 +2,8 @@
 
 general:
   nametag:
+    ticket-prefix: '&7[&6UMTicket]'
+    watcher-prefix: '&7[&6UMWatcher&7]'
     prefix: '&7[&6UltimateModeration&7]'
 
 # Command Messages
@@ -207,6 +209,6 @@ notify:
   block:
     main: '&a Has mined [&6%material%&a] at &6'
   ticket:
-    created: '&7[UM] &a[Ticket #%tid% - %type% - %player%&a] Has been created!'
-    status: '&7[UM] &a[Ticket #%tid% - %type% - %player%&a] New Status: &6%status%'
-    response: '&7[UM] &a[Ticket #%tid% - %type% - %player%&a] Has a new response!'
+    created: '&a[Ticket #%tid% - %type% - %player%&a] Has been created!'
+    status: '&a[Ticket #%tid% - %type% - %player%&a] New Status: &6%status%'
+    response: '&a[Ticket #%tid% - %type% - %player%&a] Has a new response!'
