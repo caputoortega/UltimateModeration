@@ -32,9 +32,18 @@ public class LoginListener implements Listener {
 
         AppliedPunishment appliedPunishment = playerPunishData.getActivePunishments(PunishmentType.BAN).get(0);
 
-        event.setKickMessage(instance.getLocale().getMessage("event.ban.message")
-                .processPlaceholder("reason", appliedPunishment.getReason() == null ? "" : appliedPunishment.getReason())
-                .processPlaceholder("duration", Methods.makeReadable(appliedPunishment.getTimeRemaining())).getMessage());
+        String banReason = appliedPunishment.getReason() == null ? "" : appliedPunishment.getReason();
+        String kickMessage = appliedPunishment.getDuration() == -1 ?
+            instance.getLocale().getMessage("event.ban.message.permanent")
+                .processPlaceholder("reason", banReason.toLowerCase())
+                .getMessage()
+            :
+            instance.getLocale().getMessage("event.ban.message.temporary")
+                .processPlaceholder("reason", banReason.toLowerCase())
+                .processPlaceholder("duration", Methods.makeReadable(appliedPunishment.getTimeRemaining()))
+                .getMessage()
+            ;
+        event.setKickMessage(kickMessage);
 
         event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_BANNED);
 

@@ -107,6 +107,7 @@ public class PunishGui extends Gui {
                         switch (type) {
                             case BAN:
                             case MUTE:
+                            case KICK_WARNING:
                             case WARNING:
                                 new Punishment(type, duration, reason).execute(player, toModerate);
                                 break;

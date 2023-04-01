@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 public class InvSeeModeration extends AbstractModeration {
 
     public InvSeeModeration(UltimateModeration plugin) {
-        super(plugin, true, false);
+        super(plugin, false, false);
         registerCommand(plugin);
     }
 

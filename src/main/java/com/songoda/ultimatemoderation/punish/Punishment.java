@@ -59,7 +59,7 @@ public class Punishment {
                 if (victim.isOnline())
                     Bukkit.getScheduler().runTask(plugin, () -> victim.getPlayer().kickPlayer(plugin.getLocale()
                             .getMessage("event.ban.message")
-                            .processPlaceholder("reason", reason == null ? "" : reason)
+                            .processPlaceholder("reason", reason == null ? "" : reason.toLowerCase())
                             .processPlaceholder("duration", Methods.makeReadable(duration)).getMessage()));
                 break;
             case MUTE:
@@ -73,8 +73,14 @@ public class Punishment {
                 if (victim.isOnline())
                     Bukkit.getScheduler().runTask(plugin, () -> victim.getPlayer().kickPlayer(plugin.getLocale()
                             .getMessage("event.kick.message")
-                            .processPlaceholder("reason", reason == null ? "" : reason).getMessage()));
+                            .processPlaceholder("reason", reason == null ? "" : reason.toLowerCase()).getMessage()));
                 break;
+            case KICK_WARNING:
+                if (victim.isOnline())
+                    Bukkit.getScheduler().runTask(plugin, () -> victim.getPlayer().kickPlayer(plugin.getLocale()
+                            .getMessage("event.kick_warning.message")
+                            .processPlaceholder("reason", reason == null ? "" : reason.toLowerCase()).getMessage()));
+        break;
             case WARNING:
                 sendMessage(victim);
                 break;
@@ -87,7 +93,7 @@ public class Punishment {
 
         if (reason != null)
             punishSuccess += plugin.getLocale().getMessage("event.punish.reason")
-                    .processPlaceholder("reason", reason).getMessage();
+                    .processPlaceholder("reason", reason.toLowerCase()).getMessage();
 
         if (duration != -1 && duration != 0)
             punishSuccess += plugin.getLocale().getMessage("event.punish.theirduration")
@@ -115,7 +121,7 @@ public class Punishment {
 
         if (reason != null)
             punishSuccess += plugin.getLocale().getMessage("event.punish.reason")
-                    .processPlaceholder("reason", reason).getMessage();
+                    .processPlaceholder("reason", reason.toLowerCase()).getMessage();
 
         if (duration != -1)
             punishSuccess += plugin.getLocale().getMessage("event.punish.yourduration")

@@ -53,7 +53,9 @@ event:
     yourduration: '&7. &7Your punishment will be lifted in &6%duration%'
   ban:
     success: '&7You have banned &6%player%'
-    message: '&7You have been banned for &6%reason%&7. Your ban will expire after &6%duration%&7.'
+    message: 
+      temporary: '&7You have been banned for &6%reason%&7. Your ban will expire after &6%duration%&7.'
+      permanent: '&7You have been &cpermanently &7banned for &6%reason%&7.'
     already: '&cThis user is already banned.'
   unban:
     success: '&7You have unbanned &6%player%'
@@ -66,6 +68,9 @@ event:
   kick:
     success: '&7You have kicked &6%player%'
     message: '&7You have been kicked for &6%reason%&7.'
+  kick_warning:
+    success: '&7You have kick-warned &6%player'
+    message: '&7You have been kick-warned for &6%reason%&7.'
   warning:
     success: '&7You have warned &6%player%'
     message: '&7You have been warned'
@@ -135,6 +140,7 @@ gui:
     all: All
     ban: Ban
     kick: Kick
+    kick_warning: Kick Warning
     warning: Warning
     mute: Mute
   punish:

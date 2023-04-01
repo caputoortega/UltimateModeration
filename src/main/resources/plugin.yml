@@ -1,16 +1,16 @@
 name: UltimateModeration
 description: UltimateModeration
 main: com.songoda.ultimatemoderation.UltimateModeration
-version: maven-version-number
-author: Songoda
-api-version: 1.13
-softdepend: [Vault, FabledSkyBlock]
+version: Glaciar-2.0.14
+author: [Songoda, bernardMC]
+api-version: 1.19
+softdepend: [spark, Vault, FabledSkyBlock]
 commands:
-  UltimateModeration:
+  Court:
     description: View information on this plugin.
     default: true
-    aliases: [um, p]
-    usage: /um
+    aliases: [punish, p]
+    usage: /court
   ClearChat:
     description: Clear the chat
     default: false

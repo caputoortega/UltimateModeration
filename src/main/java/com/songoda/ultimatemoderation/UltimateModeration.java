@@ -32,6 +32,7 @@ import org.bukkit.plugin.PluginManager;
 import java.util.List;
 
 public class UltimateModeration extends SongodaPlugin {
+    
     private static UltimateModeration INSTANCE;
 
     private final GuiManager guiManager = new GuiManager(this);
@@ -77,6 +78,7 @@ public class UltimateModeration extends SongodaPlugin {
                 );
         this.commandManager.addCommand(new CommandBan(this));
         this.commandManager.addCommand(new CommandClearChat(this));
+        this.commandManager.addCommand(new CommandKickWarning(this));
         this.commandManager.addCommand(new CommandKick(this));
         this.commandManager.addCommand(new CommandMute(this));
         this.commandManager.addCommand(new CommandRandomPlayer(this));

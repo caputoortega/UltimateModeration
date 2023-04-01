@@ -3,6 +3,8 @@ package com.songoda.ultimatemoderation.commands;
 import com.songoda.core.commands.AbstractCommand;
 import com.songoda.ultimatemoderation.UltimateModeration;
 import com.songoda.ultimatemoderation.gui.MainGui;
+import com.songoda.ultimatemoderation.gui.PunishGui;
+
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -13,13 +15,17 @@ public class CommandUltimateModeration extends AbstractCommand {
     private final UltimateModeration plugin;
 
     public CommandUltimateModeration(UltimateModeration plugin) {
-        super(CommandType.PLAYER_ONLY, "UltimateModeration");
+        super(CommandType.PLAYER_ONLY, "court");
         this.plugin = plugin;
     }
 
     @Override
     protected ReturnType runCommand(CommandSender sender, String... args) {
-        plugin.getGuiManager().showGUI((Player) sender, new MainGui(plugin, (Player) sender));
+        if(args.length > 0) {
+            plugin.getGuiManager().showGUI((Player) sender, new PunishGui(plugin, plugin.getServer().getOfflinePlayer(args[0]), null, (Player) sender));
+        } else {
+            plugin.getGuiManager().showGUI((Player) sender, new MainGui(plugin, (Player) sender));
+        }
         return ReturnType.SUCCESS;
     }
 
@@ -35,7 +41,7 @@ public class CommandUltimateModeration extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/um";
+        return "/court";
     }
 
     @Override

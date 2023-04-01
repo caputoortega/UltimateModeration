@@ -4,7 +4,7 @@ import com.songoda.ultimatemoderation.UltimateModeration;
 
 public enum PunishmentType {
 
-    ALL, BAN, KICK, WARNING, MUTE;
+    ALL, BAN, KICK, KICK_WARNING, WARNING, MUTE;
 
     private static PunishmentType[] vals = values();
 

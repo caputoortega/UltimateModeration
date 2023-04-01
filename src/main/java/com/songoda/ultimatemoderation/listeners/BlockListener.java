@@ -36,11 +36,15 @@ public class BlockListener implements Listener {
 
             if (player.hasPermission("um.trackblockbreaks") && instance.getConfig().getBoolean("Main.Notify Blocks")) {
                 chat.getChat("notify").messageAll(
-                        UltimateModeration.getInstance().getLocale().getMessage("general.nametag.watcher-prefix").getMessage()
-                                + " " + Bukkit.getPlayer(player.getUniqueId()).getDisplayName()
-                                + UltimateModeration.getInstance().getLocale().getMessage("notify.block.main")
-                                        .getMessage().replace("%material%", material.name())
-                                + "(" + block.getX() + ", " + block.getY() + ", " + block.getZ() + ")&a!");
+                    UltimateModeration.getInstance().getLocale().getMessage("general.nametag.watcher-prefix").getMessage() + " " + 
+                    UltimateModeration.getInstance().getLocale()
+                    .getMessage("notify.block.main")
+                        .processPlaceholder("player", Bukkit.getPlayer(player.getUniqueId()).getDisplayName())
+                        .processPlaceholder("material", material.name())
+                        .processPlaceholder("location", "(" + block.getX() + ", " + block.getY() + ", " + block.getZ() + ")")
+                        .processPlaceholder("tool", event.getPlayer().getInventory().getItemInMainHand().toString())
+                        .getMessage()                    
+                );
             }
         }
     }

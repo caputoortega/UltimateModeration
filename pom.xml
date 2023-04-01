@@ -2,7 +2,7 @@
     <groupId>com.songoda</groupId>
     <artifactId>UltimateModeration</artifactId>
     <modelVersion>4.0.0</modelVersion>
-    <version>2.0.14</version>
+    <version>Glaciar-1.0.0</version>
 
     <build>
         <defaultGoal>clean install</defaultGoal>
@@ -15,8 +15,8 @@
                 <version>3.8.0</version>
 
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
 
@@ -63,6 +63,7 @@
 
                             <artifactSet>
                                 <includes>
+                                    <include>ar.com.caputo:GlaciarCore</include>
                                     <include>com.songoda:SongodaCore</include>
                                 </includes>
                             </artifactSet>
@@ -92,9 +93,10 @@
     </build>
 
     <repositories>
+
         <repository>
-            <id>songoda-public</id>
-            <url>https://repo.songoda.com/repository/public/</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io/</url>
         </repository>
 
         <repository>
@@ -103,23 +105,24 @@
         </repository>
 
         <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io/</url>
+            <id>songoda-public</id>
+            <url>https://repo.songoda.com/repository/public/</url>
         </repository>
+
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>com.songoda</groupId>
-            <artifactId>SongodaCore</artifactId>
-            <version>2.6.18</version>
+            <groupId>ar.com.caputo</groupId>
+            <artifactId>GlaciarCore</artifactId>
+            <version>1.0.0-SONGODA_2.6.18</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.18-R0.1-SNAPSHOT</version>
+            <version>1.19.3-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
