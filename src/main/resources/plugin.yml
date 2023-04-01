@@ -63,6 +63,10 @@ commands:
     description: Kick
     default: false
     usage: /kick
+  KickWarning:
+    description: KickWarn
+    default: false
+    usage: /kickwarning
   Mute:
     description: Mute
     default: false

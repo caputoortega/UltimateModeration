@@ -9,6 +9,8 @@ general:
 # Command Messages
 
 command:
+  generic:
+    playerNotFound: '&6%player% &ccould not be found!'
   clearchat:
     cleared: '&6%player% &7cleared the chat!'
     immune: '&aYou were immune to the clear chat because of your perms.'
