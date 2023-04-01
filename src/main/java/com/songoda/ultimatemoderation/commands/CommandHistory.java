@@ -35,7 +35,7 @@ public class CommandHistory extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "history <player>";
+        return "/court history <player>";
     }
 
     @Override
