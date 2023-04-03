@@ -64,7 +64,6 @@ public class AltsGui extends Gui {
                 (event) -> {
                     AnvilGui gui = new AnvilGui(event.player, this);
                     gui.setAction(event2 -> {
-                        List<UUID> players = new ArrayList<>(plugin.getPunishmentManager().getPunishments().keySet());
 
                         for (Player p : Bukkit.getOnlinePlayers()) {
                             if (players.contains(p.getUniqueId())) continue;

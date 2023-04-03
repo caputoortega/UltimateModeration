@@ -40,9 +40,9 @@ public class MainGui extends Gui {
 
         for (Player player : Bukkit.getOnlinePlayers())
             players.add(player.getUniqueId());
-        for (UUID uuid : plugin.getPunishmentManager().getPunishments().keySet()) {
-            if (Bukkit.getOfflinePlayer(uuid).isOnline()) continue;
-            players.add(uuid);
+        for (OfflinePlayer player : Bukkit.getOfflinePlayers()) {
+            if (player.isOnline()) continue;
+            players.add(player.getUniqueId());
         }
 
         setTitle(plugin.getLocale().getMessage("gui.players.title").getMessage());
@@ -73,7 +73,6 @@ public class MainGui extends Gui {
                 (event) -> {
                     AnvilGui gui = new AnvilGui(event.player, this);
                     gui.setAction(event2 -> {
-                        List<UUID> players = new ArrayList<>(plugin.getPunishmentManager().getPunishments().keySet());
 
                         for (Player p : Bukkit.getOnlinePlayers()) {
                             if (players.contains(p.getUniqueId())) continue;
@@ -85,6 +84,7 @@ public class MainGui extends Gui {
                         if (found.size() >= 1) {
                             this.players.clear();
                             this.players.addAll(found);
+                            this.currentOnline = Online.BOTH;
                             showPage();
                         } else {
                             plugin.getLocale().getMessage("gui.players.nonefound").sendMessage(event.player);
