@@ -81,7 +81,7 @@ public class PlayerGui extends Gui {
                     (event) -> plugin.getGuiManager().showGUI(viewer,
                             new NotesManagerGui(plugin, toModerate, event.player)));
 
-        if (moderate)
+        if (moderate && toModerate.isOnline())
             setButton(40, GuiUtils.createButtonItem(CompatibleMaterial.DIAMOND_CHESTPLATE,
                     plugin.getLocale().getMessage("gui.player.moderate").getMessage()),
                     (event) -> guiManager.showGUI(viewer, new ModerateGui(plugin, toModerate, event.player)));
