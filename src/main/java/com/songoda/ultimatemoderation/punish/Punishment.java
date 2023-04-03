@@ -58,7 +58,7 @@ public class Punishment {
                 }
                 if (victim.isOnline())
                     Bukkit.getScheduler().runTask(plugin, () -> victim.getPlayer().kickPlayer(plugin.getLocale()
-                            .getMessage("event.ban.message")
+                            .getMessage(getDuration() != -1 ? "event.ban.message.temporary" : "event.ban.message.permanent")
                             .processPlaceholder("reason", reason == null ? "" : reason.toLowerCase())
                             .processPlaceholder("duration", Methods.makeReadable(duration)).getMessage()));
                 break;
