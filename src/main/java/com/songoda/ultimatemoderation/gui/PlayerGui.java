@@ -70,7 +70,7 @@ public class PlayerGui extends Gui {
                     (event) -> plugin.getGuiManager().showGUI(viewer, new AltsGui(plugin, toModerate)))
                 .highlightItem(31);
 
-        if (toModerate.isOnline() && punishments)
+        if (punishments)
             setButton(32, GuiUtils.createButtonItem(CompatibleMaterial.DIAMOND_SWORD,
                     plugin.getLocale().getMessage("gui.player.punishments").getMessage()),
                     (event) -> plugin.getGuiManager().showGUI(viewer, new PunishmentsGui(plugin, toModerate)));

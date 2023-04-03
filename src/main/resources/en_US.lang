@@ -128,7 +128,7 @@ gui:
     leftclick: '&7Left-Click to edit.'
     rightclick: '&7Right-Click to destroy.'
   punishments:
-    title: '&8%toModerate% > Punishments'
+    title: '&8%toModerate% > History'
     reason: '&6Reason'
     duration: '&6Initial Duration'
     punisher: '&6Punisher'
@@ -186,7 +186,7 @@ gui:
     title: '&8Players > %toModerate%'
     punish: '&6&lPunish'
     moderate: '&b&lModerate'
-    punishments: '&c&lPunishments'
+    punishments: '&c&lHistory'
     notes: '&a&lNotes'
     tickets: '&7&lTickets'
     alts: '&c&lAlts'
