@@ -1,16 +1,24 @@
 name: UltimateModeration
 description: UltimateModeration
 main: com.songoda.ultimatemoderation.UltimateModeration
-version: Glaciar-2.0.14
+version: Glaciar-1.0.0
 author: [Songoda, bernardMC]
 api-version: 1.19
 softdepend: [spark, Vault, FabledSkyBlock]
 commands:
   Court:
     description: View information on this plugin.
-    default: true
+    default: false
     aliases: [punish, p]
     usage: /court
+  History:
+    description: View a player's criminal history
+    default: false
+    usage: /history <player>
+  Alts:
+    description: View a player potential alts
+    default: false
+    usage: /alts <player>
   ClearChat:
     description: Clear the chat
     default: false

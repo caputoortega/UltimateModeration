@@ -11,7 +11,7 @@ import java.sql.Statement;
 public class _1_InitialMigration extends DataMigration {
 
     public _1_InitialMigration() {
-        super(1);
+        super(2);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class _1_InitialMigration extends DataMigration {
 
         // Create templates table
         try (Statement statement = connection.createStatement()) {
-            statement.execute("CREATE TABLE " + tablePrefix + "templates (" +
+            statement.execute("CREATE TABLE IF NOT EXISTS " + tablePrefix + "templates (" +
                     "id INTEGER PRIMARY KEY" + autoIncrement + ", " +
                     "punishment_type VARCHAR(15) NOT NULL, " +
                     "duration BIGINT NOT NULL," + // If -1 then its permanent
@@ -32,7 +32,7 @@ public class _1_InitialMigration extends DataMigration {
 
         // Create punishments table
         try (Statement statement = connection.createStatement()) {
-            statement.execute("CREATE TABLE " + tablePrefix + "punishments (" +
+            statement.execute("CREATE TABLE IF NOT EXISTS " + tablePrefix + "punishments (" +
                     "id INTEGER PRIMARY KEY" + autoIncrement + ", " +
                     "type VARCHAR(15) NOT NULL, " +
                     "duration BIGINT," + // If null then its permanent
@@ -45,7 +45,7 @@ public class _1_InitialMigration extends DataMigration {
 
         // Create notes table
         try (Statement statement = connection.createStatement()) {
-            statement.execute("CREATE TABLE " + tablePrefix + "notes (" +
+            statement.execute("CREATE TABLE IF NOT EXISTS " + tablePrefix + "notes (" +
                     "id INTEGER PRIMARY KEY" + autoIncrement + ", " +
                     "note TEXT NOT NULL, " +
                     "author VARCHAR(36) NOT NULL," +
@@ -56,7 +56,7 @@ public class _1_InitialMigration extends DataMigration {
 
         // Create tickets table
         try (Statement statement = connection.createStatement()) {
-            statement.execute("CREATE TABLE " + tablePrefix + "tickets (" +
+            statement.execute("CREATE TABLE IF NOT EXISTS " + tablePrefix + "tickets (" +
                     "id INTEGER PRIMARY KEY" + autoIncrement + ", " +
                     "victim VARCHAR(36) NOT NULL," +
                     "subject TEXT NOT NULL," +
@@ -73,12 +73,23 @@ public class _1_InitialMigration extends DataMigration {
 
         // Create ticket responses table
         try (Statement statement = connection.createStatement()) {
-            statement.execute("CREATE TABLE " + tablePrefix + "ticket_responses (" +
+            statement.execute("CREATE TABLE IF NOT EXISTS " + tablePrefix + "ticket_responses (" +
                     "ticket_id INTEGER NOT NULL, " +
                     "author VARCHAR(36) NOT NULL," +
                     "message TEXT NOT NULL," +
                     "posted_date BIGINT" +
                     ")");
+        }
+
+        // Create IP history table
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(
+                "CREATE TABLE IF NOT EXISTS " + tablePrefix + "ip_history (" +
+                "ip VARCHAR(255) NOT NULL, " +
+                "player VARCHAR(36) NOT NULL, " +
+                "lastUsed TIMESTAMP NOT NULL" +
+                ");"
+            );
         }
     }
 

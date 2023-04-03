@@ -74,9 +74,11 @@ public class UltimateModeration extends SongodaPlugin {
                 .addSubCommands(
                         new CommandReload(this),
                         new CommandSettings(this, guiManager),
-                        new CommandHelp(this),
-                        new CommandHistory(this)
+                        new CommandHelp(this)
                 );
+                
+        this.commandManager.addCommand(new CommandHistory(this));
+        this.commandManager.addCommand(new CommandAlts(this));
         this.commandManager.addCommand(new CommandBan(this));
         this.commandManager.addCommand(new CommandClearChat(this));
         this.commandManager.addCommand(new CommandKickWarning(this));

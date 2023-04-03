@@ -179,6 +179,9 @@ gui:
       leftclick: '&7Left-Click to update the'
       leftclick2: '&7template &6%template%&7.'
       rightclick: '&7Right-Click to save as a new Template.'
+  alts:
+    title: '&8Alt Inspector > %toModerate%'
+    banned: '&c&lBANNED'
   player:
     title: '&8Players > %toModerate%'
     punish: '&6&lPunish'
@@ -186,6 +189,7 @@ gui:
     punishments: '&c&lPunishments'
     notes: '&a&lNotes'
     tickets: '&7&lTickets'
+    alts: '&c&lAlts'
   moderate:
     title: '&8%toModerate% > Moderate'
   notes:

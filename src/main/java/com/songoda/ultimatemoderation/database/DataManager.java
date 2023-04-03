@@ -11,18 +11,27 @@ import com.songoda.ultimatemoderation.tickets.TicketResponse;
 import com.songoda.ultimatemoderation.tickets.TicketStatus;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.function.Consumer;
+
+import javax.annotation.Nullable;
 
 public class DataManager extends DataManagerAbstract {
 
@@ -372,4 +381,109 @@ public class DataManager extends DataManagerAbstract {
             }
         });
     }
+
+
+    /**
+     * Purposedly blocking since it's only meant to be used as a hook
+     * @param uuid
+     * @return
+     */
+    private final List<String> getUserAddresses(UUID uuid) {
+
+        Set<String> ips = new HashSet<>();
+
+        try(Connection connection = this.databaseConnector.getConnection()) {
+
+            String getIp = "SELECT ip FROM " + this.getTablePrefix() + "ip_history WHERE player=? ORDER BY lastUsed ASC";
+            PreparedStatement stat = connection.prepareStatement(getIp);
+            stat.setString(1, uuid.toString());
+
+            ResultSet rs = stat.executeQuery();
+
+            while(rs.next()) {
+                ips.add(rs.getString("ip"));
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return new ArrayList<>(ips);
+
+    }
+
+    /**
+     * Purposedly blocking since it's only meant to be used as a hook
+     */
+    private final Set<UUID> getPlayersWithAddress(String address, @Nullable UUID exclude) {
+
+        Set<UUID> players = new HashSet<>();
+
+        try(Connection connection = this.databaseConnector.getConnection()) {
+
+            boolean shouldExclude = exclude != null;
+
+            StringBuilder getAlts = new StringBuilder("SELECT player FROM " + this.getTablePrefix() + "ip_history WHERE ip=? ");
+
+            if(shouldExclude) getAlts.append("AND player !=? ");
+
+            getAlts.append("ORDER BY lastUsed ASC;");
+
+            PreparedStatement stat = connection.prepareStatement(getAlts.toString());
+            stat.setString(1, address);
+            if(shouldExclude) stat.setString(2, exclude.toString());
+
+            ResultSet rs = stat.executeQuery();
+
+            while(rs.next()) {
+                players.add(UUID.fromString(rs.getString("player")));
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return players;
+
+    }
+
+    public void registerUserIp(UUID player, String ipAddress) {
+
+        this.runAsync(() -> {
+
+            try(Connection connection = this.databaseConnector.getConnection()) {
+
+                String registerIp = getUserAddresses(player).contains(ipAddress)
+                        ? "UPDATE " + this.getTablePrefix() + "ip_history" + " SET lastUsed=? WHERE ip=? AND player=?"
+                        : "INSERT INTO " + this.getTablePrefix() + "ip_history(lastUsed, ip, player) VALUES(?, ?, ?);";
+
+                PreparedStatement stat = connection.prepareStatement(registerIp.toString());
+                stat.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+                stat.setString(2, ipAddress);
+                stat.setString(3, player.toString());
+                stat.executeUpdate();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+        });
+
+    }
+
+    public List<UUID> getPlayerAlts(UUID uuid) {
+
+        Set<UUID> players = new HashSet<>();
+        List<String> ips = getUserAddresses(uuid);
+
+        for (String ip : ips) {
+            
+            players.addAll(getPlayersWithAddress(ip, uuid));
+
+        }
+        
+        return new ArrayList<>(players);
+
+
+    } 
 }

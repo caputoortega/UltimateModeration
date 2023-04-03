@@ -28,7 +28,13 @@ public class LoginListener implements Listener {
 
         List<AppliedPunishment> appliedPunishments = playerPunishData.getActivePunishments(PunishmentType.BAN);
 
-        if (appliedPunishments.isEmpty()) return;
+        if (appliedPunishments.isEmpty()) {
+            
+
+            instance.getDataManager().registerUserIp(event.getUniqueId(), event.getAddress().getHostAddress());
+
+            return;
+        };
 
         AppliedPunishment appliedPunishment = playerPunishData.getActivePunishments(PunishmentType.BAN).get(0);
 
